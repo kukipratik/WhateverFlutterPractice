@@ -1,0 +1,1 @@
+ This "if (!doubleTapIconMode && !singleTapIconMode)" statement in login page is in order to remove the error     like ; Opening of double homepage ; performing "double tap" action even when the animation for "single tap" is occuring and vice-verse. 

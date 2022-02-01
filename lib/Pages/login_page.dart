@@ -13,6 +13,8 @@ class _LogInPageState extends State<LogInPage> {
   String userName = '';
   bool changeButton = false;
   bool doubleTap = false;
+  bool singleTapIconMode = false;
+  bool doubleTapIconMode = false;
 
   @override
   Widget build(BuildContext context) {
@@ -72,19 +74,11 @@ class _LogInPageState extends State<LogInPage> {
 
                   //Using Animated container with InkWell.................
                   InkWell(
-                    onDoubleTap: () {
-                      setState(() {
-                        changeButton = !changeButton;
-                        doubleTap = !doubleTap;
-                      });
-                    },
-                    onTap: () async {
-                      setState(() {
-                        changeButton = true;
-                      });
-                      await Future.delayed(const Duration(seconds: 1));
-                      Navigator.pushNamed(context, MyRoutes.home);
-                    },
+                    // for single tap...
+                    onTap: goToHomePage(),
+                    // for double tap...
+                    onDoubleTap: changeIntoHelpIcon(),
+                    // for animated container like button...
                     child: AnimatedContainer(
                       duration: const Duration(seconds: 1),
                       width: changeButton ? 50 : 140,
@@ -107,6 +101,38 @@ class _LogInPageState extends State<LogInPage> {
     ));
   }
 
+// goto HomePage by changing icon....
+  goToHomePage() {
+    return (() async {
+      // prefer path:- "malfunction/malfunction.txt" for more detail (index 1.)
+      if (!doubleTapIconMode && !singleTapIconMode) {
+        setState(() {
+          changeButton = true;
+          singleTapIconMode = true;
+        });
+        await Future.delayed(const Duration(seconds: 1));
+        await Navigator.pushNamed(context, MyRoutes.home);
+        setState(() {
+          changeButton = false;
+          singleTapIconMode = false;
+        });
+      }
+    });
+  }
+
+// change into help icon with animation...
+  changeIntoHelpIcon() {
+    return (() {
+      if (!singleTapIconMode) {
+        setState(() {
+          changeButton = !changeButton;
+          doubleTap = !doubleTap;
+          doubleTapIconMode = !doubleTapIconMode;
+        });
+      }
+    });
+  }
+
 // when tapped single time...
   Icon itsSingleTap() {
     return const Icon(
@@ -120,7 +146,7 @@ class _LogInPageState extends State<LogInPage> {
         Icons.help_outline,
         color: Colors.white,
       );
-      
+
 // text in the button....
   Text logInText() => const Text(
         "Login",
