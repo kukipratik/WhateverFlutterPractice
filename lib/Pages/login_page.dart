@@ -78,13 +78,7 @@ class _LogInPageState extends State<LogInPage> {
                         doubleTap = !doubleTap;
                       });
                     },
-                    onTap: () async {
-                      setState(() {
-                        changeButton = true;
-                      });
-                      await Future.delayed(const Duration(seconds: 1));
-                      Navigator.pushNamed(context, MyRoutes.home);
-                    },
+                    onTap: goToHomePage(),
                     child: AnimatedContainer(
                       duration: const Duration(seconds: 1),
                       width: changeButton ? 50 : 140,
@@ -107,20 +101,32 @@ class _LogInPageState extends State<LogInPage> {
     ));
   }
 
+// going to HomePage....
+  goToHomePage() => (() async {
+        setState(() {
+          changeButton = true;
+        });
+        // this await is to wait for 1s for animation...
+        await Future.delayed(const Duration(seconds: 1));
+        // and this await is to wait here when user goes back to login page again
+        await Navigator.pushNamed(context, MyRoutes.home);
+        setState(() {
+          changeButton = false;
+        });
+      });
+
 // when tapped single time...
-  Icon itsSingleTap() {
-    return const Icon(
-      Icons.done_all,
-      color: Colors.white,
-    );
-  }
+  Icon itsSingleTap() => const Icon(
+        Icons.done_all,
+        color: Colors.white,
+      );
 
 // when tapped double time...
   Icon itsDoubleTap() => const Icon(
         Icons.help_outline,
         color: Colors.white,
       );
-      
+
 // text in the button....
   Text logInText() => const Text(
         "Login",
