@@ -26,7 +26,7 @@ class _LogInPageState extends State<LogInPage> {
             children: [
               // providing some space..
               const SizedBox(
-                height: 40,
+                height: 50,
               ),
               // providing image...
               Image.asset("images/login.png"),
@@ -36,7 +36,7 @@ class _LogInPageState extends State<LogInPage> {
               ),
 
               Text(
-                (userName == '') ? "Welcome" : "Logging in as:\n '$userName' ",
+                (userName == '') ? "Welcome" : "Logging in as:\n   '$userName' ",
                 style:
                     const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
@@ -56,8 +56,9 @@ class _LogInPageState extends State<LogInPage> {
                     },
                     //The validator method returns a string containing the error message when the user input is invalid or null if the user input is valid
                     validator: (value) {
-                      if (value != null) {
-                        "User Name can't be empty.";
+                      // here 'value' => sting got when user types something. It may be ''(empty string) or 'flaskf'(string provided by user)
+                      if (value == '') {
+                        return "User Name can't be empty.";
                       } else {
                         return null;
                       }
@@ -76,6 +77,17 @@ class _LogInPageState extends State<LogInPage> {
                       border: OutlineInputBorder(),
                     ),
                     keyboardType: TextInputType.number,
+                    validator: (value) {
+                      if (value == '') {
+                        return "Password can't be empty";
+                      }
+                      // this (value!) is to check if value is null or not...
+                      else if (value!.length < 6) {
+                        return "Password should be atleast 6 numbers";
+                      } else {
+                        return null;
+                      }
+                    },
                   ),
                   // providing some space..
                   const SizedBox(
@@ -109,22 +121,24 @@ class _LogInPageState extends State<LogInPage> {
 // going to HomePage....
   goToHomePage() {
     return (() async {
-      if(_formKey.currentState!.validate()){
-        // this if is to avoid the opening of to homepages...
-      if (!iconChange) {
-        setState(() {
-          changeButton = true;
-          iconChange = true;
-        });
-        // this await is to wait for 1s for animation...
-        await Future.delayed(const Duration(seconds: 1));
-        // and this await is to wait here when user goes back to login page again
-        await Navigator.pushNamed(context, MyRoutes.home);
-        setState(() {
-          changeButton = false;
-          iconChange = false;
-        });
-      }
+      // making this code run only when username is not empty... or when no error msg...
+      if (_formKey.currentState!.validate()) {
+        // if our "validate()" is error message then, bool => false else vise-versa
+        if (!iconChange) {
+          // this if is to avoid the opening of to homepages...
+          setState(() {
+            changeButton = true;
+            iconChange = true;
+          });
+          // this await is to wait for 1s for animation...
+          await Future.delayed(const Duration(seconds: 1));
+          // and this await is to wait here when user goes back to login page again
+          await Navigator.pushNamed(context, MyRoutes.home);
+          setState(() {
+            changeButton = false;
+            iconChange = false;
+          });
+        }
       }
     });
   }
