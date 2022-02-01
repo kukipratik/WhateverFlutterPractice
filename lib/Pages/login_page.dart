@@ -12,7 +12,7 @@ class _LogInPageState extends State<LogInPage> {
   // making attributes...
   String userName = '';
   bool changeButton = false;
-  bool doubleTap = false;
+  bool iconChange = false;
 
   @override
   Widget build(BuildContext context) {
@@ -72,13 +72,23 @@ class _LogInPageState extends State<LogInPage> {
 
                   //Using Animated container with InkWell.................
                   InkWell(
-                    onDoubleTap: () {
-                      setState(() {
-                        changeButton = !changeButton;
-                        doubleTap = !doubleTap;
-                      });
+                    onTap: () async {
+                      // this if is to avoid the opening of to homepages...
+                      if (!iconChange) {
+                        setState(() {
+                          changeButton = true;
+                          iconChange = true;
+                        });
+                        // this await is to wait for 1s for animation...
+                        await Future.delayed(const Duration(seconds: 1));
+                        // and this await is to wait here when user goes back to login page again
+                        await Navigator.pushNamed(context, MyRoutes.home);
+                        setState(() {
+                          changeButton = false;
+                          iconChange = false;
+                        });
+                      }
                     },
-                    onTap: goToHomePage(),
                     child: AnimatedContainer(
                       duration: const Duration(seconds: 1),
                       width: changeButton ? 50 : 140,
@@ -89,9 +99,7 @@ class _LogInPageState extends State<LogInPage> {
                           borderRadius: BorderRadius.all(
                               Radius.circular(changeButton ? 50 : 8)),
                           shape: BoxShape.rectangle),
-                      child: changeButton
-                          ? (doubleTap ? (itsDoubleTap()) : (itsSingleTap()))
-                          : (logInText()),
+                      child: changeButton ? changeIcon() : logInText(),
                     ),
                   ),
                 ]))
@@ -102,35 +110,19 @@ class _LogInPageState extends State<LogInPage> {
   }
 
 // going to HomePage....
-  goToHomePage() => (() async {
-        setState(() {
-          changeButton = true;
-        });
-        // this await is to wait for 1s for animation...
-        await Future.delayed(const Duration(seconds: 1));
-        // and this await is to wait here when user goes back to login page again
-        await Navigator.pushNamed(context, MyRoutes.home);
-        setState(() {
-          changeButton = false;
-        });
-      });
 
 // when tapped single time...
-  Icon itsSingleTap() => const Icon(
+  Icon changeIcon() => const Icon(
         Icons.done_all,
         color: Colors.white,
       );
 
-// when tapped double time...
-  Icon itsDoubleTap() => const Icon(
-        Icons.help_outline,
-        color: Colors.white,
-      );
-
 // text in the button....
-  Text logInText() => const Text(
-        "Login",
-        style: TextStyle(
-            fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
-      );
+  Text logInText() {
+    return const Text(
+      "Login",
+      style: TextStyle(
+          fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
+    );
+  }
 }
