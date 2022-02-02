@@ -6,11 +6,9 @@ class Product {
   int? id;
   String? name;
   String? desc;
-  String? price;
+  int? price;
   String? color;
   String? image;
-
-// this is a construtior....
   Product({
     this.id,
     this.name,
@@ -20,14 +18,14 @@ class Product {
     this.image,
   });
 
-// this is self made constructor...
-
+// this is a construtior....
+  
 
   Product copyWith({
     int? id,
     String? name,
     String? desc,
-    String? price,
+    int? price,
     String? color,
     String? image,
   }) {
@@ -57,7 +55,7 @@ class Product {
       id: map['id']?.toInt(),
       name: map['name'],
       desc: map['desc'],
-      price: map['price'],
+      price: map['price']?.toInt(),
       color: map['color'],
       image: map['image'],
     );

@@ -1,6 +1,7 @@
 // ignore_for_file: unnecessary_null_comparison
 
 import 'dart:convert';
+import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutterpractice/ItemsData/items_data.dart';
@@ -39,7 +40,7 @@ class _HomePageState extends State<HomePage> {
           title: const Text("HomePage!!!"),
         ),
         drawer: const MyDrawer(),
-        body: (ProductsInfo.products!=null && ProductsInfo.products.isNotEmpty)? 
+        body: 
         ListView.builder(
           // we're giving listcount how many items we have in a list...
           itemCount: ProductsInfo.products.length,
@@ -48,9 +49,7 @@ class _HomePageState extends State<HomePage> {
             return (ItemWidget(item: ProductsInfo.products[index]));
           },
         )
-        : const Center(
-          child: CircularProgressIndicator(),
-        )
+        
         ));
   }
 }
@@ -67,13 +66,16 @@ class ItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(15.0),
-      child: Card(
+      padding: const EdgeInsets.only(left: 14,right: 14, top: 14,bottom: 14),
+      child: ClayContainer(
+        emboss: false,
+        color: Colors.white,
+        depth: 50,
         child: ListTile(
           leading: Image.network(item.image.toString()),
           title: Text(item.name.toString()),
           subtitle: Text(item.desc.toString()),
-          trailing: Text(item.price.toString()),
+          trailing: Text("\$"+item.price.toString()),
         ),
       ),
     );
