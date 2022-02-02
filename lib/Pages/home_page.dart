@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -19,35 +21,37 @@ class _HomePageState extends State<HomePage> {
     loadJsonData();
   }
 
-  loadJsonData() {
-    final catlogJson =
-        rootBundle.loadString("assets/files/catlog.json").toString();
-    final decodedData = jsonDecode(catlogJson);
+  loadJsonData() async {
+    await Future.delayed(const Duration(seconds: 2));
+    final catalogJson = await rootBundle.loadString("assets/files/catlog.json");
+    final decodedData = jsonDecode(catalogJson);
     var productsData = decodedData["products"];
-    List<Product> list = List.from(productsData)
-        .map<Product>((item) => Product.formMap(item))
-        .toList();
-    ProductsInfo.products = list;
+    ProductsInfo.products =
+        List.from(productsData).map<Product>((item) => Product.fromMap(item)).toList();
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    var items = ProductsInfo.products;
 
     return (Scaffold(
         appBar: AppBar(
           title: const Text("HomePage!!!"),
         ),
         drawer: const MyDrawer(),
-        body: ListView.builder(
+        body: (ProductsInfo.products!=null && ProductsInfo.products.isNotEmpty)? 
+        ListView.builder(
           // we're giving listcount how many items we have in a list...
-          itemCount: items.length,
+          itemCount: ProductsInfo.products.length,
           // item builder helps us to build list...
           itemBuilder: (context, index) {
-            final Product item = items[index];
-            return (ItemWidget(item: item));
+            return (ItemWidget(item: ProductsInfo.products[index]));
           },
-        )));
+        )
+        : const Center(
+          child: CircularProgressIndicator(),
+        )
+        ));
   }
 }
 
@@ -56,7 +60,7 @@ class ItemWidget extends StatelessWidget {
   const ItemWidget({
     Key? key,
     required this.item,
-  }) : super(key: key);
+  }) : assert(item!=null), super(key: key);
 
   final Product item;
 
@@ -66,10 +70,10 @@ class ItemWidget extends StatelessWidget {
       padding: const EdgeInsets.all(15.0),
       child: Card(
         child: ListTile(
-          leading: Image.network(item.image),
-          title: Text(item.name),
-          subtitle: Text(item.desc),
-          trailing: Text(item.price),
+          leading: Image.network(item.image.toString()),
+          title: Text(item.name.toString()),
+          subtitle: Text(item.desc.toString()),
+          trailing: Text(item.price.toString()),
         ),
       ),
     );
