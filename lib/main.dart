@@ -13,6 +13,8 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
+  // This is a constructor with key passed and checked null as argument...
+  // here super is used to call the constructor of the "StatelessWidget"(its parent class)...
 
   @override
   Widget build(BuildContext context) {
