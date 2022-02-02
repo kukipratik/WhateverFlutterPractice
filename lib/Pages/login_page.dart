@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutterpractice/routes.dart';
+import 'package:flutterpractice/utils/routes.dart';
 
 class LogInPage extends StatefulWidget {
   const LogInPage({Key? key}) : super(key: key);
@@ -29,7 +29,7 @@ class _LogInPageState extends State<LogInPage> {
                 height: 50,
               ),
               // providing image...
-              Image.asset("images/login.png"),
+              Image.asset("assets/images/login.png"),
 
               const SizedBox(
                 height: 20,
