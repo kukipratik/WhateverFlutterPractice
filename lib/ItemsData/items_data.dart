@@ -1,5 +1,14 @@
 import 'dart:convert';
 
+
+class ProductsInfo {
+// This class helps us to acess the list containing product info (as a whole) as its element....
+
+  // Making the list of the product info...
+  static List<Product> products = [];
+}
+
+
 class Product {
 // This class helps us to acess the specific attribute of the single specific product...
 
@@ -18,9 +27,7 @@ class Product {
     this.image,
   });
 
-// this is a construtior....
-  
-
+// these are created by extension "Dart data class generator" for perfection....
   Product copyWith({
     int? id,
     String? name,
@@ -92,11 +99,4 @@ class Product {
       color.hashCode ^
       image.hashCode;
   }
-}
-
-class ProductsInfo {
-// This class helps us to acess the list containing product info (as a whole) as its element....
-
-  // Making the list of the product info...
-  static List<Product> products = [];
 }
