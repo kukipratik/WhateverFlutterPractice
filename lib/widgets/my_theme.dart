@@ -5,7 +5,7 @@ class MyTheme {
   // method for the light theme...
   static lightTheme(context) {
     return ThemeData(
-        primarySwatch: Colors.purple,
+        primarySwatch: Colors.green,
         fontFamily: GoogleFonts.poppins().fontFamily,
         appBarTheme: const AppBarTheme(
           color: Colors.purple,
