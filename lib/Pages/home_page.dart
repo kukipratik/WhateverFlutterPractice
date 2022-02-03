@@ -51,8 +51,11 @@ class _HomePageState extends State<HomePage> {
         ),
         drawer: const MyDrawer(),
         body: (ProductsInfo.products != null && ProductsInfo.products.isNotEmpty )?(
-          ListView.builder(
+          GridView.builder(
           // we're giving listcount how many items we have in a list...
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+          ),
           itemCount: ProductsInfo.products.length,
           // item builder helps us to build list...
           itemBuilder: (context, index) {
@@ -85,11 +88,10 @@ class ItemWidget extends StatelessWidget {
         emboss: false,
         color: Colors.white,
         depth: 50,
-        child: ListTile(
-          leading: Image.network(item.image.toString()),
-          title: Text(item.name.toString()),
-          subtitle: Text(item.desc.toString()),
-          trailing: Text("\$" + item.price.toString()),
+        child: GridTile(
+          child: Image.network(item.image.toString()),
+          header: Text(item.name.toString()),
+          footer: Text(item.price.toString()),
         ),
       ),
     );

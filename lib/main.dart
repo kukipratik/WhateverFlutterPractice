@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpractice/Pages/home_page.dart';
 import 'package:flutterpractice/utils/routes.dart';
-import 'package:google_fonts/google_fonts.dart';
-
+import 'package:flutterpractice/widgets/my_theme.dart';
 
 // import 'Pages/home_page.dart';
 import 'Pages/login_page.dart';
@@ -26,12 +25,13 @@ class MyApp extends StatelessWidget {
         MyRoutes.login : (context)=> const LogInPage(),
         MyRoutes.home: (context)=> const HomePage(),
       },
-      // providing theme to the app...
+      // The theme section...
+      //themeMode is to change light mode or dark mode...
       themeMode: ThemeMode.light,
-      theme: ThemeData(
-        textTheme: GoogleFonts.latoTextTheme(Theme.of(context).textTheme),
-        primarySwatch: Colors.purple,
-      ),
+      // This is for light mode...
+      theme: MyTheme.lightTheme(context),
+      //this is for dark mode...
+      darkTheme: MyTheme.darkTheme(context),
     ));
   }
 }

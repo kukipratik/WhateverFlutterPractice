@@ -39,6 +39,8 @@ dependencies:
   google_fonts: ^2.2.0
   #clay container...
   clay_containers: ^0.3.2
+  #velocity X...(by codepur)
+  velocity_x: ^3.4.0
 
 dev_dependencies:
   flutter_test:
