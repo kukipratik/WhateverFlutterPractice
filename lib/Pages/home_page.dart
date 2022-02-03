@@ -5,8 +5,6 @@ import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutterpractice/ItemsData/items_data.dart';
-import 'package:flutterpractice/widgets/my_drawer.dart';
-import 'package:flutterpractice/widgets/my_item_widget.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class HomePage extends StatefulWidget {
@@ -51,57 +49,63 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Vx.hexToColor("#f5f5f5"),
       body: SafeArea(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const MakeHeader(),
-            ListView.builder(
-              itemCount: ProductsInfo.products.length,
-              itemBuilder: (context, index) {
-                var item = ProductsInfo.products[index];
-                return Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ClayContainer(
-                          emboss: false,
-                          height: 100,
-                          width: 90,
-                          depth: 20,
-                          child: Image.network(item.image.toString())),
-                      ClayContainer(
-                        emboss: false,
-                        height: 100,
-                        width: 255,
-                        depth: 20,
-                        borderRadius: 15,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+            if ((ProductsInfo.products.isNotEmpty &&
+                ProductsInfo.products != null))
+              const MakeHeader(),
+            (ProductsInfo.products.isEmpty || ProductsInfo.products == null)
+                ? const Center(child: CircularProgressIndicator())
+                : ListView.builder(
+                    itemCount: ProductsInfo.products.length,
+                    itemBuilder: (context, index) {
+                      var item = ProductsInfo.products[index];
+                      return Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            item.name.toString().text.normal.xl2.make(),
-                            item.desc.toString().text.black.make(),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                "\$${item.price.toString()}"
-                                    .text
-                                    .normal
-                                    .xl2
-                                    .make(),
-                                ElevatedButton(
-                                  onPressed: () {},
-                                  child: "Buy".text.make(),
-                                )
-                              ],
-                            )
+                            ClayContainer(
+                                emboss: false,
+                                height: 100,
+                                width: 90,
+                                depth: 20,
+                                child: Image.network(item.image.toString())),
+                            ClayContainer(
+                              emboss: false,
+                              height: 100,
+                              width: 255,
+                              depth: 20,
+                              borderRadius: 15,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  item.name.toString().text.normal.xl2.make(),
+                                  item.desc.toString().text.black.make(),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      "\$${item.price.toString()}"
+                                          .text
+                                          .normal
+                                          .xl2
+                                          .make(),
+                                      ElevatedButton(
+                                        onPressed: () {},
+                                        child: "Buy".text.make(),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ).pOnly(left: 10, top: 2, right: 8),
+                            ),
                           ],
-                        ).pOnly(left: 10, top: 2, right: 8),
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ).expand(),
+                        ),
+                      );
+                    },
+                  ).expand(),
           ],
         ).p(4),
       ),
