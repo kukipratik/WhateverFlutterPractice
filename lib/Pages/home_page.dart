@@ -54,55 +54,7 @@ class _HomePageState extends State<HomePage> {
             const MakeHeader(),
             (ProductsInfo.products.isEmpty || ProductsInfo.products == null)
                 ? const CircularProgressIndicator().centered().expand()
-                : ListView.builder(
-                    itemCount: ProductsInfo.products.length,
-                    itemBuilder: (context, index) {
-                      var item = ProductsInfo.products[index];
-                      return Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            ClayContainer(
-                                emboss: false,
-                                height: 100,
-                                width: 90,
-                                depth: 20,
-                                child: Image.network(item.image.toString())),
-                            ClayContainer(
-                              emboss: false,
-                              height: 100,
-                              width: 255,
-                              depth: 20,
-                              borderRadius: 15,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  item.name.toString().text.normal.xl2.make(),
-                                  item.desc.toString().text.black.make(),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      "\$${item.price.toString()}"
-                                          .text
-                                          .normal
-                                          .xl2
-                                          .make(),
-                                      ElevatedButton(
-                                        onPressed: () {},
-                                        child: "Buy".text.make(),
-                                      )
-                                    ],
-                                  )
-                                ],
-                              ).pOnly(left: 10, top: 2, right: 8),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ).expand(),
+                : const BuildTheList()
           ],
         ).p(4),
       ),
@@ -110,6 +62,7 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
+// This class will help us to make header...
 class MakeHeader extends StatelessWidget {
   const MakeHeader({
     Key? key,
@@ -131,5 +84,71 @@ class MakeHeader extends StatelessWidget {
         "Trending Products".text.xl2.blueGray900.shadowBlur(50).make()
       ],
     ).p(15);
+  }
+}
+
+// this class contains the listView.builder
+class BuildTheList extends StatelessWidget {
+  const BuildTheList({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: ProductsInfo.products.length,
+      itemBuilder: (context, index) {
+        var item = ProductsInfo.products[index];
+        return MakeListItem(item: item);
+      },
+    ).expand();
+  }
+}
+
+// This class will make the list item and return it...
+class MakeListItem extends StatelessWidget {
+  final Product? item;
+  const MakeListItem({Key? key, @required this.item})
+      : assert(item != null),
+        super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(15.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          ClayContainer(
+              emboss: false,
+              height: 100,
+              width: 90,
+              depth: 20,
+              child: Image.network(item!.image.toString())),
+          ClayContainer(
+            emboss: false,
+            height: 100,
+            width: 255,
+            depth: 20,
+            borderRadius: 15,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                item!.name.toString().text.normal.xl2.make(),
+                item!.desc.toString().text.black.make(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    "\$${item!.price.toString()}".text.normal.xl2.make(),
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: "Buy".text.make(),
+                    )
+                  ],
+                )
+              ],
+            ).pOnly(left: 10, top: 2, right: 8),
+          ),
+        ],
+      ),
+    );
   }
 }
