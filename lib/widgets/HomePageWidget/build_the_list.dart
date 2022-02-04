@@ -45,7 +45,7 @@ class MakeListItem extends StatelessWidget {
                 height: 100,
                 width: 90,
                 depth: 20,
-                child: Hero(
+                child: Hero(   //this hero is for simple animation...
                   tag: Key(item!.id.toString()),
                   child: Image.network(item!.image
                       .toString()),
