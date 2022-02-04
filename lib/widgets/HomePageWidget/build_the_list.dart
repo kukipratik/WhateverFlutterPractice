@@ -5,6 +5,7 @@ import 'package:flutterpractice/Pages/product_detail.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../ItemsData/items_data.dart';
+import '../../Pages/cart_page.dart';
 
 class BuildTheList extends StatelessWidget {
   const BuildTheList({Key? key}) : super(key: key);
@@ -34,8 +35,12 @@ class MakeListItem extends StatelessWidget {
       padding: const EdgeInsets.all(15.0),
       child: InkWell(
         onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => ProductDetail(item: item,)));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ProductDetail(
+                        item: item,
+                      )));
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -45,10 +50,10 @@ class MakeListItem extends StatelessWidget {
                 height: 100,
                 width: 90,
                 depth: 20,
-                child: Hero(   //this hero is for simple animation...
+                child: Hero(
+                  //this hero is for simple animation...
                   tag: Key(item!.id.toString()),
-                  child: Image.network(item!.image
-                      .toString()),
+                  child: Image.network(item!.image.toString()),
                 ) //here '!' is to check for null value...
                 ),
             ClayContainer(
@@ -67,8 +72,13 @@ class MakeListItem extends StatelessWidget {
                     children: [
                       "\$${item!.price.toString()}".text.normal.xl2.make(),
                       ElevatedButton(
-                        onPressed: () {},
-                        child: "Buy".text.make(),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Cart()));
+                        },
+                        child: "+ Add to cart".text.make(),
                       )
                     ],
                   )

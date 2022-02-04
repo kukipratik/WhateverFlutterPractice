@@ -1,9 +1,11 @@
 // ignore_for_file: unnecessary_null_comparison
 
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutterpractice/ItemsData/items_data.dart';
+import 'package:flutterpractice/Pages/cart_page.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../widgets/HomePageWidget/make_header.dart';
@@ -48,6 +50,12 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(onPressed: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => const Cart()));
+      },
+      child: const Icon(CupertinoIcons.cart_badge_plus),
+      ),
       backgroundColor: Vx.hexToColor("#f5f5f5"),
       body: SafeArea(
         child: Column(

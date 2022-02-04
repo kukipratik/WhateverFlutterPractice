@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutterpractice/ItemsData/items_data.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import 'cart_page.dart';
+
 class ProductDetail extends StatelessWidget {
   final Product? item;
   const ProductDetail({Key? key, @required this.item}) : super(key: key);
@@ -45,9 +47,12 @@ class ProductDetail extends StatelessWidget {
         children: [
           "\$${item!.price.toString()}".text.underline.extraBold.xl3.make(),
           ElevatedButton(
-            onPressed: () {},
-            child: "Buy".text.xl2.make(),
-          ).wh(90, 40).py12()
+            onPressed: () {
+               Navigator.push(
+            context, MaterialPageRoute(builder: (context) => const Cart()));
+            },
+            child: "+ Add to cart".text.xl2.make(),
+          ).wh(150, 40).py12()
         ],
       ).p24(),
     );
