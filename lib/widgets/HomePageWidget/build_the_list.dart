@@ -1,6 +1,7 @@
 // this class contains the listView.builder
 import 'package:clay_containers/widgets/clay_container.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterpractice/Pages/product_detail.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../ItemsData/items_data.dart';
@@ -22,7 +23,7 @@ class BuildTheList extends StatelessWidget {
 
 // This class will make the list item and return it...
 class MakeListItem extends StatelessWidget {
-  final Product? item;
+  final Product? item; //here '?' is to check for null value
   const MakeListItem({Key? key, @required this.item})
       : assert(item != null),
         super(key: key);
@@ -31,40 +32,51 @@ class MakeListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(15.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          ClayContainer(
+      child: InkWell(
+        onTap: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => ProductDetail(item: item,)));
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            ClayContainer(
+                emboss: false,
+                height: 100,
+                width: 90,
+                depth: 20,
+                child: Hero(
+                  tag: Key(item!.id.toString()),
+                  child: Image.network(item!.image
+                      .toString()),
+                ) //here '!' is to check for null value...
+                ),
+            ClayContainer(
               emboss: false,
               height: 100,
-              width: 90,
+              width: 255,
               depth: 20,
-              child: Image.network(item!.image.toString())),
-          ClayContainer(
-            emboss: false,
-            height: 100,
-            width: 255,
-            depth: 20,
-            borderRadius: 15,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                item!.name.toString().text.normal.xl2.make(),
-                item!.desc.toString().text.black.make(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    "\$${item!.price.toString()}".text.normal.xl2.make(),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: "Buy".text.make(),
-                    )
-                  ],
-                )
-              ],
-            ).pOnly(left: 10, top: 2, right: 8),
-          ),
-        ],
+              borderRadius: 15,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  item!.name.toString().text.normal.xl2.make(),
+                  item!.desc.toString().text.black.make(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      "\$${item!.price.toString()}".text.normal.xl2.make(),
+                      ElevatedButton(
+                        onPressed: () {},
+                        child: "Buy".text.make(),
+                      )
+                    ],
+                  )
+                ],
+              ).pOnly(left: 10, top: 2, right: 8),
+            ),
+          ],
+        ),
       ),
     );
   }

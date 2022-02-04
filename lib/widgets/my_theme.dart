@@ -8,9 +8,9 @@ class MyTheme {
         primarySwatch: Colors.green,
         fontFamily: GoogleFonts.poppins().fontFamily,
         appBarTheme: const AppBarTheme(
-          color: Colors.purple,
+          color: Colors.white,
           elevation: 15,
-          iconTheme: IconThemeData(color: Colors.white),
+          iconTheme: IconThemeData(color: Colors.black),
         ));
   }
 
