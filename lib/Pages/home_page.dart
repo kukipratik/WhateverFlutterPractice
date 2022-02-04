@@ -50,13 +50,10 @@ class _HomePageState extends State<HomePage> {
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if ((ProductsInfo.products.isNotEmpty &&
-                ProductsInfo.products != null))
-              const MakeHeader(),
+            const MakeHeader(),
             (ProductsInfo.products.isEmpty || ProductsInfo.products == null)
-                ? const Center(child: CircularProgressIndicator())
+                ? const CircularProgressIndicator().centered().expand()
                 : ListView.builder(
                     itemCount: ProductsInfo.products.length,
                     itemBuilder: (context, index) {
