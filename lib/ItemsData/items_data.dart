@@ -1,13 +1,18 @@
 import 'dart:convert';
 
-
 class ProductsInfo {
 // This class helps us to acess the list containing product info (as a whole) as its element....
 
-  // Making the list of the product info...
+// Making the list of the product info...
   static List<Product> products = [];
-}
 
+//this will return us the element of products list using their id...
+ static Product getById(int id) =>
+      (products.firstWhere((product) => product.id == id /*,or else*/));
+
+// this will return the element of products list using index...
+ static  Product getByIndex(int index) => (products[index]);
+}
 
 class Product {
 // This class helps us to acess the specific attribute of the single specific product...
@@ -70,7 +75,8 @@ class Product {
 
   String toJson() => json.encode(toMap());
 
-  factory Product.fromJson(String source) => Product.fromMap(json.decode(source));
+  factory Product.fromJson(String source) =>
+      Product.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -80,23 +86,23 @@ class Product {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is Product &&
-      other.id == id &&
-      other.name == name &&
-      other.desc == desc &&
-      other.price == price &&
-      other.color == color &&
-      other.image == image;
+        other.id == id &&
+        other.name == name &&
+        other.desc == desc &&
+        other.price == price &&
+        other.color == color &&
+        other.image == image;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-      name.hashCode ^
-      desc.hashCode ^
-      price.hashCode ^
-      color.hashCode ^
-      image.hashCode;
+        name.hashCode ^
+        desc.hashCode ^
+        price.hashCode ^
+        color.hashCode ^
+        image.hashCode;
   }
 }

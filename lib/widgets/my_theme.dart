@@ -12,7 +12,7 @@ class MyTheme {
         primaryColor: Colors.green,
         splashColor: Colors.black,
         hintColor: Colors.black,
-        backgroundColor: Vx.hexToColor("#c2c2c2"),
+        backgroundColor: Vx.hexToColor("#f0f0f0"),
         appBarTheme: const AppBarTheme(
           color: Colors.white,
           elevation: 15,

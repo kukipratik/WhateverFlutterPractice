@@ -49,7 +49,7 @@ class MakeListItem extends StatelessWidget {
                 emboss: false,
                 height: 100,
                 width: 90,
-                depth: 20,
+                depth: 30,
                 borderRadius: 25,
                 color: context.backgroundColor,
                 child: Hero(
@@ -80,12 +80,7 @@ class MakeListItem extends StatelessWidget {
                                 MaterialStateProperty.all(context.primaryColor),
                             shape: MaterialStateProperty.all(
                                 const StadiumBorder())),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const Cart()));
-                        },
+                        onPressed: () {},
                         child: "+ Add to cart".text.make(),
                       )
                     ],
