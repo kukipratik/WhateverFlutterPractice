@@ -21,8 +21,10 @@ class _AddingButtonState extends State<AddingButton> {
           backgroundColor: MaterialStateProperty.all(context.primaryColor),
           shape: MaterialStateProperty.all(const StadiumBorder())),
       onPressed: () {
-        CartInfo().addIdToCart(widget.id!);
+        CartInfo().addIdToCart(widget.id!.toInt());
         debugPrint(productAdded.toString());
+        debugPrint(widget.id!.toString());
+        debugPrint(CartInfo().addedProductsList.length.toString());
         setState(() {
           productAdded = !productAdded;
         });

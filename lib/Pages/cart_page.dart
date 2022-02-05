@@ -1,5 +1,7 @@
 import 'package:clay_containers/widgets/clay_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterpractice/ItemsData/cart_items.dart';
+import 'package:flutterpractice/ItemsData/items_data.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class Cart extends StatelessWidget {
@@ -7,6 +9,7 @@ class Cart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<Product> newList = CartInfo().addedProductsList;
     return Scaffold(
       backgroundColor: context.theme.backgroundColor,
       appBar: AppBar(
@@ -26,12 +29,12 @@ class Cart extends StatelessWidget {
           child: Container(
             color: Colors.white,
             child: ListView.builder(
-                itemCount: 8,
+                itemCount: newList.length,
                 itemBuilder: (context, index) {
                   return ListTile(
                     leading: const Icon(Icons.donut_small_rounded,color: Colors.black,),
-                    title: "Item".text.bold.black.xl2.make(),
-                    subtitle: "Description".text.black.make(),
+                    title: newList[index].name.toString().text.bold.black.xl2.make(),
+                    subtitle: newList[index].desc.toString().text.black.make(),
                     trailing: const IconButton(
                         onPressed: null, icon: Icon(Icons.remove_circle,color: Colors.black,)),
                   );

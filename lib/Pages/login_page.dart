@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpractice/utils/routes.dart';
-import 'package:flutterpractice/widgets/my_theme.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class LogInPage extends StatefulWidget {
