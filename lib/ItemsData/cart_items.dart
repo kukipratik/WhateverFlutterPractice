@@ -2,18 +2,21 @@ import 'items_data.dart';
 
 class CartInfo {
   // making list to store the id when user presses the "add to cart button"...
-  static List<int> listOfIds = [] ;
+  final List<int> listOfIds = [];
+  static var a = Product().color;
 
   // function to add Product id in listOfIds...
-  static void addIdToCart(int id) {
+  void addIdToCart(int id) {
     listOfIds.add(id);
   }
-  
+
   //function to remove Product id from listOfIds...
-  static void removeIdFromCart(int id){
+  void removeIdFromCart(int id) {
     listOfIds.remove(id);
   }
 
   // Making list of products which has been added to cart using listOfIds...
-  List<Product> addedProductsList = listOfIds.map((id) => ProductsInfo.getById(id)).toList(); 
+  List<Product> get addedProductsList {
+    return listOfIds.map((id) => ProductsInfo.getById(id)).toList();
+  }
 }
