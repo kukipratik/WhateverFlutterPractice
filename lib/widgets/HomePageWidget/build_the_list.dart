@@ -5,7 +5,7 @@ import 'package:flutterpractice/Pages/product_detail.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../ItemsData/items_data.dart';
-import '../../Pages/cart_page.dart';
+import '../add_button.dart';
 
 class BuildTheList extends StatelessWidget {
   const BuildTheList({Key? key}) : super(key: key);
@@ -23,11 +23,17 @@ class BuildTheList extends StatelessWidget {
 }
 
 // This class will make the list item and return it...
-class MakeListItem extends StatelessWidget {
+class MakeListItem extends StatefulWidget {
   final Product? item; //here '?' is to check for null value
   const MakeListItem({Key? key, @required this.item})
       : assert(item != null),
         super(key: key);
+
+  @override
+  State<MakeListItem> createState() => _MakeListItemState();
+}
+
+class _MakeListItemState extends State<MakeListItem> {
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +45,7 @@ class MakeListItem extends StatelessWidget {
               context,
               MaterialPageRoute(
                   builder: (context) => ProductDetail(
-                        item: item,
+                        item: widget.item,
                       )));
         },
         child: Row(
@@ -54,8 +60,8 @@ class MakeListItem extends StatelessWidget {
                 color: context.backgroundColor,
                 child: Hero(
                   //this hero is for simple animation...
-                  tag: Key(item!.id.toString()),
-                  child: Image.network(item!.image.toString()),
+                  tag: Key(widget.item!.id.toString()),
+                  child: Image.network(widget.item!.image.toString()),
                 ) //here '!' is to check for null value...
                 ),
             ClayContainer(
@@ -68,21 +74,13 @@ class MakeListItem extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  item!.name.toString().text.normal.xl2.make(),
-                  item!.desc.toString().text.make(),
+                  widget.item!.name.toString().text.normal.xl2.make(),
+                  widget.item!.desc.toString().text.make(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      "\$${item!.price.toString()}".text.normal.xl2.make(),
-                      ElevatedButton(
-                        style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all(context.primaryColor),
-                            shape: MaterialStateProperty.all(
-                                const StadiumBorder())),
-                        onPressed: () {},
-                        child: "+ Add to cart".text.make(),
-                      )
+                      "\$${widget.item!.price.toString()}".text.normal.xl2.make(),
+                       AddingButton(id : widget.item!.id)
                     ],
                   )
                 ],
@@ -94,3 +92,4 @@ class MakeListItem extends StatelessWidget {
     );
   }
 }
+

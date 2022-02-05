@@ -5,12 +5,12 @@ class CartInfo {
   static List<int> listOfIds = [] ;
 
   // function to add Product id in listOfIds...
-  void addId(int id) {
+  static void addIdToCart(int id) {
     listOfIds.add(id);
   }
   
   //function to remove Product id from listOfIds...
-  void removeId(int id){
+  static void removeIdFromCart(int id){
     listOfIds.remove(id);
   }
 

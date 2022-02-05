@@ -1,6 +1,7 @@
 import 'package:clay_containers/widgets/clay_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterpractice/ItemsData/items_data.dart';
+import 'package:flutterpractice/widgets/add_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class ProductDetail extends StatelessWidget {
@@ -45,14 +46,7 @@ class ProductDetail extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           "\$${item!.price.toString()}".text.underline.extraBold.xl3.make(),
-          ElevatedButton(
-            style: ButtonStyle(
-                backgroundColor:
-                    MaterialStateProperty.all(context.primaryColor),
-                shape: MaterialStateProperty.all(const StadiumBorder())),
-            onPressed: () {},
-            child: "+ Add to cart".text.xl2.make(),
-          ).wh(150, 40).py12()
+          AddingButton(id: item!.id ).wh(150, 40).py12()
         ],
       ).p24(),
     );
