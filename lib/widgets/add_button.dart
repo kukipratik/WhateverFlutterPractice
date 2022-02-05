@@ -22,9 +22,8 @@ class _AddingButtonState extends State<AddingButton> {
           shape: MaterialStateProperty.all(const StadiumBorder())),
       onPressed: () {
         CartInfo().addIdToCart(widget.id!.toInt());
-        debugPrint(productAdded.toString());
-        debugPrint(widget.id!.toString());
-        debugPrint(CartInfo().addedProductsList.length.toString());
+        debugPrint("bool value = "+productAdded.toString());
+        debugPrint("No. of item in cart = "+CartInfo().addedProductsList.length.toString());
         setState(() {
           productAdded = !productAdded;
         });
