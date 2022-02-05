@@ -50,6 +50,8 @@ class MakeListItem extends StatelessWidget {
                 height: 100,
                 width: 90,
                 depth: 20,
+                borderRadius: 25,
+                color: context.backgroundColor,
                 child: Hero(
                   //this hero is for simple animation...
                   tag: Key(item!.id.toString()),
@@ -61,17 +63,23 @@ class MakeListItem extends StatelessWidget {
               height: 100,
               width: 255,
               depth: 20,
-              borderRadius: 15,
+              borderRadius: 20,
+              color: context.backgroundColor,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   item!.name.toString().text.normal.xl2.make(),
-                  item!.desc.toString().text.black.make(),
+                  item!.desc.toString().text.make(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       "\$${item!.price.toString()}".text.normal.xl2.make(),
                       ElevatedButton(
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(context.primaryColor),
+                            shape: MaterialStateProperty.all(
+                                const StadiumBorder())),
                         onPressed: () {
                           Navigator.push(
                               context,

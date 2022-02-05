@@ -12,8 +12,9 @@ class ProductDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(230, 230, 230, 1),
+      backgroundColor: context.theme.backgroundColor,
       appBar: AppBar(
+        foregroundColor: Colors.transparent,
         elevation: 0,
         title: ClayText(
           "PodCast",
@@ -38,7 +39,7 @@ class ProductDetail extends StatelessWidget {
                       .h40(context)),
             ),
           ),
-          item!.name.toString().toUpperCase().text.bold.black.xl4.make().py(10),
+          item!.name.toString().toUpperCase().text.bold.xl4.make().py(10),
           item!.desc.toString().text.xl.make(),
         ],
       ),
@@ -47,6 +48,10 @@ class ProductDetail extends StatelessWidget {
         children: [
           "\$${item!.price.toString()}".text.underline.extraBold.xl3.make(),
           ElevatedButton(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(context.primaryColor),
+              shape: MaterialStateProperty.all(const StadiumBorder())
+            ),
             onPressed: () {
                Navigator.push(
             context, MaterialPageRoute(builder: (context) => const Cart()));

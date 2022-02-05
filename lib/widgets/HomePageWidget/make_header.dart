@@ -20,8 +20,14 @@ class MakeHeader extends StatelessWidget {
           color: Colors.grey,
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
-        // const HeightBox(2),
-        "Trending Products".text.xl2.blueGray900.shadowBlur(50).make()
+        Text(
+          "Trending Products",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: context.theme.splashColor,
+            fontSize: 22
+            ),
+        ),
       ],
     ).p(15);
   }

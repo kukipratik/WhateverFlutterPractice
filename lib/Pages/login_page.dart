@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpractice/utils/routes.dart';
+import 'package:flutterpractice/widgets/my_theme.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class LogInPage extends StatefulWidget {
   const LogInPage({Key? key}) : super(key: key);
@@ -45,11 +47,15 @@ class _LogInPageState extends State<LogInPage> {
                 child: Column(children: [
                   // for Entering username...
                   TextFormField(
-                    decoration: const InputDecoration(
-                      label: Text("User Name"),
+                    decoration: InputDecoration(
+                      label: const Text("User Name"),
+                      labelStyle: TextStyle(
+                        color: context.theme.hintColor
+                      ),
                       hintText: "Enter your UserName",
-                      border: OutlineInputBorder(),
+                      border: const OutlineInputBorder(),
                     ),
+                    
                     onChanged: (value) {
                       userName = value;
                       setState(() {});
@@ -71,10 +77,13 @@ class _LogInPageState extends State<LogInPage> {
                   // for entering password...
                   TextFormField(
                     obscureText: true,
-                    decoration: const InputDecoration(
-                      label: Text("Pin Password"),
+                    decoration: InputDecoration(
+                      label: const Text("Pin Password"),
+                      labelStyle: TextStyle(
+                        color: context.theme.hintColor
+                      ),
                       hintText: "Enter your Password",
-                      border: OutlineInputBorder(),
+                      border: const OutlineInputBorder(),
                     ),
                     keyboardType: TextInputType.number,
                     validator: (value) {
