@@ -13,7 +13,6 @@ class AddingButton extends StatefulWidget {
 }
 
 class _AddingButtonState extends State<AddingButton> {
-
   //this expression will let us know if product is already in cart list or not...
   //made this expression getter sothat there won't be any problem while initializing widget to it....
   bool get productAdded =>
@@ -26,11 +25,13 @@ class _AddingButtonState extends State<AddingButton> {
           backgroundColor: MaterialStateProperty.all(context.primaryColor),
           shape: MaterialStateProperty.all(const StadiumBorder())),
       onPressed: () {
-        CartInfo().addIdToCart(widget.product!.id!.toInt());
-        debugPrint("bool value = " + productAdded.toString());
-        debugPrint("No. of item in cart = " +
-            CartInfo().addedProductsList.length.toString());
-        setState(() {});
+        if (!productAdded) {
+          CartInfo().addIdToCart(widget.product!.id!.toInt());
+          debugPrint("bool value = " + productAdded.toString());
+          debugPrint("No. of item in cart = " +
+              CartInfo().addedProductsList.length.toString());
+          setState(() {});
+        }
       },
       child:
           productAdded ? const Icon(Icons.done) : "+ Add to cart".text.make(),
