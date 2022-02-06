@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterpractice/ItemsData/cart_items.dart';
 import 'package:flutterpractice/ItemsData/items_data.dart';
@@ -14,7 +15,7 @@ class AddingButton extends StatelessWidget {
   Widget build(BuildContext context) {
 
   // this will rebuild the widget when ever AddMutation is executed...
-    VxState.watch(context, on: [AddMutation]);
+    VxState.watch(context, on: [AddMutation,RemoveMutation]);
 
     // This expression helps us to use the instance created in store...
     final CartInfo _cart = (VxState.store as MyStore).cart;
@@ -34,7 +35,7 @@ class AddingButton extends StatelessWidget {
         }
       },
       child:
-          productAdded ? const Icon(Icons.done) : "+ Add to cart".text.make(),
+          productAdded ?  const Icon(Icons.done) : const Icon(CupertinoIcons.cart_badge_plus),
     );
   }
 }

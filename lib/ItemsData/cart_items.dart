@@ -22,9 +22,9 @@ class CartInfo {
   // }
 
   //function to remove Product id from listOfIds...
-  void removeIdFromCart(int id) {
-    _listOfIds.remove(id);
-  }
+  // void removeIdFromCart(int id) {
+  //   _listOfIds.remove(id);
+  // }
 
   // Making list of products which has been added to cart using listOfIds...
   List<Product> get addedProductsList {
@@ -41,5 +41,17 @@ class AddMutation extends VxMutation<MyStore> {
   @override
   perform() {
     store!.cart._listOfIds.add(item.id!);
+  }
+}
+
+class RemoveMutation extends VxMutation<MyStore> {
+//creating item field...
+  final Product item;
+// the constructor for the field...
+  RemoveMutation(this.item);
+
+  @override
+  perform() {
+    store!.cart._listOfIds.remove(item.id!);
   }
 }
