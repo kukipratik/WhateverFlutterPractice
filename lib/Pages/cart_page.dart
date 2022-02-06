@@ -4,9 +4,14 @@ import 'package:flutterpractice/ItemsData/cart_items.dart';
 import 'package:flutterpractice/ItemsData/items_data.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class Cart extends StatelessWidget {
+class Cart extends StatefulWidget {
   const Cart({Key? key}) : super(key: key);
 
+  @override
+  State<Cart> createState() => _CartState();
+}
+
+class _CartState extends State<Cart> {
   @override
   Widget build(BuildContext context) {
     List<Product> newList = CartInfo().addedProductsList;
@@ -32,11 +37,28 @@ class Cart extends StatelessWidget {
                 itemCount: newList.length,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    leading: const Icon(Icons.donut_small_rounded,color: Colors.black,),
-                    title: newList[index].name.toString().text.bold.black.xl2.make(),
+                    leading: const Icon(
+                      Icons.donut_small_rounded,
+                      color: Colors.black,
+                    ),
+                    title: newList[index]
+                        .name
+                        .toString()
+                        .text
+                        .bold
+                        .black
+                        .xl2
+                        .make(),
                     subtitle: newList[index].desc.toString().text.black.make(),
-                    trailing: const IconButton(
-                        onPressed: null, icon: Icon(Icons.remove_circle,color: Colors.black,)),
+                    trailing: IconButton(
+                        onPressed: () {
+                          CartInfo().removeIdFromCart(newList[index].id!);
+                          setState(() {});
+                        },
+                        icon: const Icon(
+                          Icons.remove_circle,
+                          color: Colors.black,
+                        )),
                   );
                 }),
           ),

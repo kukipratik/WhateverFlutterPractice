@@ -13,6 +13,9 @@ class AddingButton extends StatefulWidget {
 }
 
 class _AddingButtonState extends State<AddingButton> {
+
+  //this expression will let us know if product is already in cart list or not...
+  //made this expression getter sothat there won't be any problem while initializing widget to it....
   bool get productAdded =>
       (CartInfo().addedProductsList.contains(widget.product)) ? true : false;
 
