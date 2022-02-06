@@ -2,6 +2,7 @@ import 'package:clay_containers/widgets/clay_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterpractice/ItemsData/cart_items.dart';
 import 'package:flutterpractice/ItemsData/items_data.dart';
+import 'package:flutterpractice/Pages/product_detail.dart';
 import 'package:flutterpractice/core/store.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -101,12 +102,22 @@ class MakeCartList extends StatelessWidget {
             itemCount: newList.length,
             itemBuilder: (context, index) {
               return ListTile(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              ProductDetail(item: newList[index])));
+                },
                 leading: const Icon(
                   Icons.donut_small_rounded,
                   color: Colors.black,
                 ),
-                title:
-                    newList[index].name.toString().text.bold.black.xl2.make(),
+                title: Hero(
+                  tag: const Key("textAnimation"),
+                  child:
+                      newList[index].name.toString().text.bold.black.xl2.make(),
+                ),
                 subtitle: newList[index].desc.toString().text.black.make(),
                 trailing: IconButton(
                     onPressed: () {

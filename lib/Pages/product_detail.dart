@@ -38,7 +38,11 @@ class ProductDetail extends StatelessWidget {
                       .h40(context)),
             ),
           ),
-          item!.name.toString().toUpperCase().text.bold.xl4.make().py(10),
+          Hero(
+            tag: const Key('itemAnimation'),
+            child:
+                item!.name.toString().toUpperCase().text.bold.xl4.make().py(10),
+          ),
           item!.desc.toString().text.xl.make(),
         ],
       ),
@@ -46,7 +50,7 @@ class ProductDetail extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           "\$${item!.price.toString()}".text.underline.extraBold.xl3.make(),
-          AddingButton(product : item ).wh(150, 40).py12()
+          AddingButton(product: item).wh(150, 40).py12()
         ],
       ).p24(),
     );
