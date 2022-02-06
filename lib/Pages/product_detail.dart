@@ -46,7 +46,7 @@ class ProductDetail extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           "\$${item!.price.toString()}".text.underline.extraBold.xl3.make(),
-          AddingButton(id: item!.id ).wh(150, 40).py12()
+          AddingButton(product : item ).wh(150, 40).py12()
         ],
       ).p24(),
     );

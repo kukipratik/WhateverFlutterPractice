@@ -80,7 +80,7 @@ class _MakeListItemState extends State<MakeListItem> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       "\$${widget.item!.price.toString()}".text.normal.xl2.make(),
-                       AddingButton(id : widget.item!.id)
+                       AddingButton(product : widget.item!)
                     ],
                   )
                 ],
