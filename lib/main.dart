@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpractice/Pages/cart_page.dart';
 import 'package:flutterpractice/Pages/home_page.dart';
+import 'package:flutterpractice/core/store.dart';
 import 'package:flutterpractice/utils/routes.dart';
 import 'package:flutterpractice/widgets/my_theme.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 // import 'Pages/home_page.dart';
 import 'Pages/login_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(VxState(store: MyStore(),child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -39,4 +41,3 @@ class MyApp extends StatelessWidget {
     ));
   }
 }
-

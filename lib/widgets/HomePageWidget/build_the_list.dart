@@ -23,17 +23,11 @@ class BuildTheList extends StatelessWidget {
 }
 
 // This class will make the list item and return it...
-class MakeListItem extends StatefulWidget {
+class MakeListItem extends StatelessWidget {
   final Product? item; //here '?' is to check for null value
   const MakeListItem({Key? key, @required this.item})
       : assert(item != null),
         super(key: key);
-
-  @override
-  State<MakeListItem> createState() => _MakeListItemState();
-}
-
-class _MakeListItemState extends State<MakeListItem> {
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +39,7 @@ class _MakeListItemState extends State<MakeListItem> {
               context,
               MaterialPageRoute(
                   builder: (context) => ProductDetail(
-                        item: widget.item,
+                        item: item,
                       )));
         },
         child: Row(
@@ -60,8 +54,8 @@ class _MakeListItemState extends State<MakeListItem> {
                 color: context.backgroundColor,
                 child: Hero(
                   //this hero is for simple animation...
-                  tag: Key(widget.item!.id.toString()),
-                  child: Image.network(widget.item!.image.toString()),
+                  tag: Key(item!.id.toString()),
+                  child: Image.network(item!.image.toString()),
                 ) //here '!' is to check for null value...
                 ),
             ClayContainer(
@@ -74,13 +68,13 @@ class _MakeListItemState extends State<MakeListItem> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  widget.item!.name.toString().text.normal.xl2.make(),
-                  widget.item!.desc.toString().text.make(),
+                  item!.name.toString().text.normal.xl2.make(),
+                  item!.desc.toString().text.make(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      "\$${widget.item!.price.toString()}".text.normal.xl2.make(),
-                       AddingButton(product : widget.item!)
+                      "\$${item!.price.toString()}".text.normal.xl2.make(),
+                       AddingButton(product : item!)
                     ],
                   )
                 ],
