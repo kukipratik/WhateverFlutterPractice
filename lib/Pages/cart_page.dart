@@ -8,11 +8,6 @@ import 'package:velocity_x/velocity_x.dart';
 class Cart extends StatelessWidget {
   const Cart({Key? key}) : super(key: key);
 
-//   @override
-//   State<Cart> createState() => _CartState();
-// }
-
-// class _CartState extends State<Cart> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +29,7 @@ class Cart extends StatelessWidget {
           height: 30,
           child: Container(
             color: Colors.white,
-            child: MakeCartList(),
+            child: const MakeCartList(),
           ),
         ).expand(),
 
@@ -45,6 +40,7 @@ class Cart extends StatelessWidget {
   }
 }
 
+// Row for making Button and to display total price...
 class MakeRow extends StatelessWidget {
   const MakeRow({
     Key? key,
@@ -52,9 +48,21 @@ class MakeRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //This experssion helps us to acess the same instance created in the store...
+    final CartInfo cart = (VxState.store as MyStore).cart;
+
+    // simply making new list to use efficiently...
+    // List<Product> newList = cart.addedProductsList;
     return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-      //for displaying total price...
-      "\$999".text.underline.extraBold.xl3.make(),
+      // This works same as Vx.watch() but will only rebuild the widget inside it....
+      VxConsumer(
+        mutations: const {RemoveMutation},
+        notifications: const {},
+        builder: (context, _, status) {
+          //for displaying total price...
+          return "\$${cart.totalPrice}".text.underline.extraBold.xl3.make();
+        },
+      ),
 
       // for buy button...
       ElevatedButton(
@@ -73,6 +81,7 @@ class MakeRow extends StatelessWidget {
   }
 }
 
+//Class for making item list in cart....
 class MakeCartList extends StatelessWidget {
   const MakeCartList({Key? key}) : super(key: key);
 
@@ -86,25 +95,28 @@ class MakeCartList extends StatelessWidget {
 
     // simply making new list to use efficiently...
     List<Product> newList = cart.addedProductsList;
-    return ListView.builder(
-        itemCount: newList.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            leading: const Icon(
-              Icons.donut_small_rounded,
-              color: Colors.black,
-            ),
-            title: newList[index].name.toString().text.bold.black.xl2.make(),
-            subtitle: newList[index].desc.toString().text.black.make(),
-            trailing: IconButton(
-                onPressed: () {
-                  RemoveMutation(newList[index]);
-                },
-                icon: const Icon(
-                  Icons.remove_circle,
+    return (newList.isEmpty)
+        ? "It's Empty...".text.bold.xl6.makeCentered()
+        : ListView.builder(
+            itemCount: newList.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                leading: const Icon(
+                  Icons.donut_small_rounded,
                   color: Colors.black,
-                )),
-          );
-        });
+                ),
+                title:
+                    newList[index].name.toString().text.bold.black.xl2.make(),
+                subtitle: newList[index].desc.toString().text.black.make(),
+                trailing: IconButton(
+                    onPressed: () {
+                      RemoveMutation(newList[index]);
+                    },
+                    icon: const Icon(
+                      Icons.remove_circle,
+                      color: Colors.black,
+                    )),
+              );
+            });
   }
 }
