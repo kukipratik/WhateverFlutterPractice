@@ -7,7 +7,8 @@ import 'package:flutter/services.dart';
 import 'package:flutterpractice/ItemsData/items_data.dart';
 import 'package:flutterpractice/Pages/cart_page.dart';
 import 'package:velocity_x/velocity_x.dart';
-
+import 'package:flutterpractice/ItemsData/cart_items.dart';
+import '../core/store.dart';
 import '../widgets/HomePageWidget/make_header.dart';
 import '../widgets/HomePageWidget/build_the_list.dart';
 
@@ -49,15 +50,25 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // This expression helps us to use the instance created in store...
+    final CartInfo _cart = (VxState.store as MyStore).cart;
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: context.primaryColor,
-        onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => const Cart()));
-        },
-        child: const Icon(CupertinoIcons.cart_fill),
-      ).badge(count: 1,size: 22,color: Colors.black,textStyle: const TextStyle(color: Colors.white,fontSize: 18)),
+      floatingActionButton: VxBuilder(
+          builder: (context, _, s) {
+            return FloatingActionButton(
+              backgroundColor: context.primaryColor,
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const Cart()));
+              },
+              child: const Icon(CupertinoIcons.cart_fill),
+            ).badge(
+                count: _cart.addedProductsList.length,
+                size: 22,
+                color: Colors.black,
+                textStyle: const TextStyle(color: Colors.white, fontSize: 18));
+          },
+          mutations: const {AddMutation, RemoveMutation}),
       backgroundColor: context.backgroundColor,
       body: SafeArea(
         child: Column(
