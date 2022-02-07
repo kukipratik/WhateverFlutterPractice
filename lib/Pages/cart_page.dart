@@ -97,7 +97,7 @@ class MakeCartList extends StatelessWidget {
     // simply making new list to use efficiently...
     List<Product> newList = cart.addedProductsList;
     return (newList.isEmpty)
-        ? "It's Empty...".text.bold.xl6.makeCentered()
+        ? "It's Empty...".text.bold.black.xl6.makeCentered()
         : ListView.builder(
             itemCount: newList.length,
             itemBuilder: (context, index) {

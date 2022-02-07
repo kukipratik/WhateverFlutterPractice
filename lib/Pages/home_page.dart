@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
               context, MaterialPageRoute(builder: (context) => const Cart()));
         },
         child: const Icon(CupertinoIcons.cart_fill),
-      ),
+      ).badge(count: 1,size: 22,color: Colors.black,textStyle: const TextStyle(color: Colors.white,fontSize: 18)),
       backgroundColor: context.backgroundColor,
       body: SafeArea(
         child: Column(

@@ -4,7 +4,6 @@ import 'package:flutterpractice/ItemsData/cart_items.dart';
 import 'package:flutterpractice/ItemsData/items_data.dart';
 import 'package:flutterpractice/Pages/cart_page.dart';
 import 'package:velocity_x/velocity_x.dart';
-
 import '../core/store.dart';
 
 class AddingButton extends StatelessWidget {
